@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 该文件编写mybatis中的mapper接口里面的方法提供对应的sql语句 -->
+
+<mapper namespace="customermapper.Customermapper">
+	<select id="select1" resultType="dao.UserPass">
+		select id,username,password from userpass
+	</select>
+	<delete id="delete_adm" parameterType="String">
+		delete from userpass where id=#{value}
+	</delete>
+	
+	<!-- 查询一个管理员 -->
+	<select id="select_one" resultType="dao.UserPass" parameterType="String">
+		select id,username,password from userpass where id=#{value}
+	</select>
+	<!-- 修改一个管理员信息 -->
+	<update id="update_one" parameterType="dao.UserPass">
+		update userpass set username=#{username},password=#{password} where id=#{id} 
+	</update>
+	<!-- 管理的添加 -->
+	<insert id="insert_one" parameterType="dao.UserPass">
+		insert into userpass (id,username,password) values(#{id},#{username},#{password})
+	</insert>
+	
+	
+	<!-- 人事增删该查 -->
+	<!-- 员工查询 -->
+	<select id="select_staff" resultType="dao.Staff">
+		select id,idcard,name,sex,age,path,department,imgpath
+			from staff
+	</select>
+	<!-- 查询一个员工 -->
+	<select id="select_staffOne" resultType="dao.Staff" parameterType="String">
+		select id,idcard,name,sex,age,path,department,imgpath
+			from staff where id=#{value}
+	</select>
+	<!-- 添加一个员工  -->
+	<insert id="insert_One" parameterType="dao.Staff">
+		insert into staff (id,idcard,name,sex,age,path,department,imgpath) values (#{id},#{idcard},#{name},#{sex},#{age},#{path},#{department},#{imgpath})
+	</insert> 
+	<!-- 删除一个员工 -->
+	<delete id="delete_sta" parameterType="String">
+		delete from staff where id=#{value}
+	</delete>
+	<!-- 修改一个员工 -->
+	<update id="update_put" parameterType="dao.Staff">
+		update staff set 
+				idcard=#{idcard},
+				name=#{name},
+				age=#{age},
+				path=#{path},
+				department=#{department},
+				imgpath=#{imgpath} where id=#{id}
+	</update>
+</mapper>
